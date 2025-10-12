@@ -5,15 +5,19 @@ namespace Backend
 {
     public class AppContext
     {
-        public readonly Operations.DataProvider dataProvider;
+        public readonly DataProvider dataProvider;
         public readonly IConfiguration configuration;
-        public readonly ILogger<DataProvider> logger;
+        public readonly ILogger<AppContext> logger;
+        public readonly GSEngine gsEngine;
+        public readonly AIEngine aiEngine;
 
-        public AppContext(CosmosClient cosmosClient, IConfiguration configuration, ILogger<DataProvider> logger)
+        public AppContext(DataProvider _dataProvider, GSEngine _gsEngine, AIEngine _aiEngine, IConfiguration configuration, ILogger<AppContext> logger)
         {
-            this.dataProvider = new Operations.DataProvider(cosmosClient, configuration, logger);
+            this.dataProvider = _dataProvider;
+            this.gsEngine = _gsEngine;
             this.configuration = configuration;
             this.logger = logger;
+            this.aiEngine = _aiEngine;
         }
     }
 }
